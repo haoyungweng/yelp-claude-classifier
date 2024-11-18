@@ -1,0 +1,10 @@
+# Core requirements
+anthropic>=0.8.0
+pandas>=2.0.0
+tqdm>=4.65.0
+datasets>=2.15.0
+pickle5>=0.0.11  # For Python < 3.8, not needed for Python 3.8+
+
+# Additional dependencies
+numpy>=1.24.0
+requests>=2.31.0
