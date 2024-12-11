@@ -248,6 +248,7 @@ Assistant: "[category]"
 
         results = []
         for idx, row in tqdm(df.iterrows(), total=len(df), desc="Classifying reviews"):
+            cache_path = self.get_cache_path(row['review_id'])
             category = self.classify_single_review(
                 row['text'], row['review_id'])
             self.save_review_to_file(row['text'], category, row['review_id'])
@@ -257,7 +258,8 @@ Assistant: "[category]"
                 'text': row['text'],
                 'stars': row['stars']
             })
-            time.sleep(0.5)  # Rate limiting
+            if not cache_path.exists():  # avoid frequently requests if we use api
+                time.sleep(0.1)
 
         return pd.DataFrame(results)
 
